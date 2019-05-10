@@ -8,7 +8,7 @@ FACE_DETECTOR = cv2.CascadeClassifier(CASCADE_XML)
 
 def haar(imagen):
     img = read(imagen)
-    img_width, img_height = img.shape
+    img_width, img_height, _ = img.shape
     img_gray = to_gray(img)
     detected_faces = FACE_DETECTOR.detectMultiScale(img_gray, 1.3, 5)
     boxes = list()
