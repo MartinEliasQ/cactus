@@ -3,7 +3,7 @@ import cv2
 import numpy as np
 
 PROTOTXT = "src/deploy.prototxt"
-CAFFE_MODEL = "src/"
+CAFFE_MODEL = "src/res10_300x300_ssd_iter_140000.caffemodel"
 
 SSD_NET = cv2.dnn.readNetFromCaffe(PROTOTXT, CAFFE_MODEL)
 

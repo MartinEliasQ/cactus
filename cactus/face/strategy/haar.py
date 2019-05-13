@@ -2,7 +2,7 @@ from cactus.utils.image import (read, to_gray)
 import cv2
 import numpy as np
 
-CASCADE_XML = "src/"
+CASCADE_XML = "src/haarcascade_frontalface_alt2.xml"
 FACE_DETECTOR = cv2.CascadeClassifier(CASCADE_XML)
 
 
