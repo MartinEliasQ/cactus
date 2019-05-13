@@ -125,7 +125,7 @@ dmypy.json
 # Project
 
 videos/
-frames/
+frame*/
 
 #vscode
 .vscode
