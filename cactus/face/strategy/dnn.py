@@ -2,15 +2,15 @@ from cactus.utils.image import (read, to_blob)
 import cv2
 import numpy as np
 
-PROTOTXT = "src/deploy.prototxt"
-CAFFE_MODEL = "src/res10_300x300_ssd_iter_140000.caffemodel"
+PROTOTXT = "../src/deploy.prototxt"
+CAFFE_MODEL = "../src/res10_300x300_ssd_iter_140000.caffemodel"
 
 SSD_NET = cv2.dnn.readNetFromCaffe(PROTOTXT, CAFFE_MODEL)
 
 
 def dnn(imagen):
     img = read(imagen)
-    img_width, img_height, _ = img.shape
+    img_width, img_height = img.size
     img_blob = to_blob(img)
     SSD_NET.setInput(img_blob)
     detections = SSD_NET.forward()

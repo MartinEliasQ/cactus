@@ -1,15 +1,16 @@
-from cactus.utils.image import (read, to_gray)
+from cactus.utils.image import (read, to_gray, to_numpy)
 import cv2
 import numpy as np
 
-CASCADE_XML = "src/haarcascade_frontalface_alt2.xml"
+CASCADE_XML = "../src/haarcascade_frontalface_alt2.xml"
 FACE_DETECTOR = cv2.CascadeClassifier(CASCADE_XML)
 
 
 def haar(imagen):
     img = read(imagen)
-    img_width, img_height, _ = img.shape
-    img_gray = to_gray(img)
+    img_width, img_height = img.size
+    img_array = to_numpy(img)
+    img_gray = to_gray(img_array)
     detected_faces = FACE_DETECTOR.detectMultiScale(img_gray, 1.3, 5)
     boxes = list()
 

@@ -27,7 +27,7 @@ def to_gray(image):
 
 
 def to_blob(image):
-    return cv2.dnn.blobFromImage(cv2.resize(image, (300, 300)),
+    return cv2.dnn.blobFromImage(cv2.resize(to_numpy(image), (300, 300)),
                                  1.0, (300, 300),
                                  (103.93, 116.77, 123.68))
 

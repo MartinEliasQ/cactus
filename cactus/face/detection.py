@@ -1,4 +1,6 @@
-from cactus.face.strategy import (dnn, haar, hog)
+from cactus.face.strategy.dnn import dnn
+from cactus.face.strategy.haar import haar
+from cactus.face.strategy.hog import hog
 
 
 class detection(object):
@@ -6,7 +8,7 @@ class detection(object):
         if strategy:
             self.detect = strategy
 
-    def detect(self, imagen):
+    def detect(self):
         print('No method was provided')
         raise Exception('No method was provided')
 
@@ -20,4 +22,4 @@ def detector(method="dnn"):
         'dnn': lambda: detection(dnn),
         'haar': lambda: detection(haar),
         'hog': lambda: detection(hog)
-    }[method]
+    }[method]()
