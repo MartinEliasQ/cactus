@@ -32,6 +32,6 @@ def to_blob(image):
                                  (103.93, 116.77, 123.68))
 
 
-def crop_box(path, box, size):
+def crop_box(path, box, size=(299, 299)):
     image = read(path)
     return image.crop(box).resize(size)

@@ -1,6 +1,9 @@
 from cactus.face.strategy.dnn import dnn
 from cactus.face.strategy.haar import haar
 from cactus.face.strategy.hog import hog
+from cactus.utils.others import add_string_to_array
+from cactus.utils.image import crop_box
+from cactus.utils.folder import get_files, get_folders
 
 
 class detection(object):
@@ -11,6 +14,15 @@ class detection(object):
     def detect(self):
         print('No method was provided')
         raise Exception('No method was provided')
+
+    def get_boxes_from_directory(self, path_batch):
+        all_boxes = map(lambda x: add_string_to_array(
+            x, self.detect(x)), path_batch)
+        return list(all_boxes)
+
+    def to_face(self, frames_folder="frames", dest_folder="faces"):
+
+        pass
 
 
 def detector(method="dnn"):

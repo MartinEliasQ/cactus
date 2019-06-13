@@ -126,6 +126,7 @@ dmypy.json
 
 videos/
 frame*/
+resources/
 
 #vscode
 .vscode
