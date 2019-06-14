@@ -17,8 +17,22 @@ def to_frames(path: str = None, dest: str = "faces", rate=1):
         count += rate
 
 
-def to_frames_from_directory(self, origen, dest):
-    routes = folder.get_paths_with_dest(origen, dest)
+def folder_to_frames(input="videos", output="frames", rate=1):
+    folder.create(output)
+    labels = folder.get_folders(input)
+    labels_files = [(label, folder.get_files("{}/{}".format(input, label)))
+                    for label
+                    in labels]
+
+    for label, label_files in labels_files:
+        for lfile in label_files:
+            print("Converting {}'s videos into frames".format(label))
+            input_video = "{}/{}/{}".format(input, label, lfile)
+            output_folder = "{}/{}".format(output, label)
+            folder.create(output_folder)
+            to_frames(input_video, output_folder, rate)
+
+    return "Done"
 
 
 def number_frames(video):

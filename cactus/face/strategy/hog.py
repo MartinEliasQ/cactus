@@ -11,13 +11,18 @@ def hog(imagen):
     img_gray = to_gray(img_array)
     detected_faces = FACE_DETECTOR(img_gray, 1)
     boxes = list()
+    boxes = [(face_box.left(),
+              face_box.top(),
+              face_box.right(),
+              face_box.bottom())
+             for _, face_box in enumerate(detected_faces)]
 
-    for _, face_box in enumerate(detected_faces):
-        x = face_box.left()
-        y = face_box.top()
-        w = face_box.right()
-        h = face_box.bottom()
+    # for _, face_box in enumerate(detected_faces):
+    #     x = face_box.left()
+    #     y = face_box.top()
+    #     w = face_box.right()
+    #     h = face_box.bottom()
 
-        box = (x, y, w, h)
-        boxes.append(np.array(box))
+    #     box = (x, y, w, h)
+    #     boxes.append(np.array(box))
     return boxes

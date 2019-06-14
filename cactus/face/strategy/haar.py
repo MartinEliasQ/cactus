@@ -13,7 +13,6 @@ def haar(imagen):
     img_gray = to_gray(img_array)
     detected_faces = FACE_DETECTOR.detectMultiScale(img_gray, 1.3, 5)
     boxes = list()
-
     for (x, y, w, h) in detected_faces:
         center_x = x + (w/2)
         center_y = y + (h/2)

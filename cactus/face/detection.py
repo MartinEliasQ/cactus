@@ -3,7 +3,7 @@ from cactus.face.strategy.haar import haar
 from cactus.face.strategy.hog import hog
 from cactus.utils.others import add_string_to_array
 from cactus.utils.image import crop_box
-from cactus.utils.folder import get_files, get_folders
+from cactus.utils.folder import create, get_files, get_folders
 
 
 class detection(object):
@@ -17,12 +17,33 @@ class detection(object):
 
     def get_boxes_from_directory(self, path_batch):
         all_boxes = map(lambda x: add_string_to_array(
-            x, self.detect(x)), path_batch)
+            x, self.detect(x)),
+            path_batch)
         return list(all_boxes)
 
     def to_face(self, frames_folder="frames", dest_folder="faces"):
+        create(dest_folder)
+        labels = get_folders(frames_folder)
+        labels_files = [(label,
+                         get_files("{}/{}".format(frames_folder,
+                                                  label)))
+                        for label
+                        in labels]
 
-        pass
+        list_return = []
+        for label, lfiles in labels_files:
+            print("Detecting {}'s faces".format(label))
+
+            list_of_files = list(map(lambda x: "{}/{}/{}".format(
+                frames_folder, label, x
+            ), lfiles))
+            create("{}/{}".format(dest_folder, label))
+            gbfd = self.get_boxes_from_directory(list_of_files)
+            # gbfd = [[elem[0].replace(frames_folder, dest_folder),
+            #          elem]
+            #         for elem in gbfd if len(elem) > 0]
+            list_return.append(gbfd)
+        return list_return
 
 
 def detector(method="dnn"):
