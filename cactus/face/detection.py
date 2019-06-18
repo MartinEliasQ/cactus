@@ -2,7 +2,7 @@ from cactus.face.strategy.dnn import dnn
 from cactus.face.strategy.haar import haar
 from cactus.face.strategy.hog import hog
 from cactus.utils.others import add_string_to_array
-from cactus.utils.image import crop_box
+from cactus.utils.image import crop_box, save_Image
 from cactus.utils.folder import create, get_files, get_folders
 
 
@@ -37,11 +37,18 @@ class detection(object):
             list_of_files = list(map(lambda x: "{}/{}/{}".format(
                 frames_folder, label, x
             ), lfiles))
+            
             create("{}/{}".format(dest_folder, label))
+
+            list_of_files = [image_file 
+                            for image_file 
+                            in list_of_files 
+                            if len(image_file) > 0]
+            
+            list_of_files = [image]
             gbfd = self.get_boxes_from_directory(list_of_files)
-            # gbfd = [[elem[0].replace(frames_folder, dest_folder),
-            #          elem]
-            #         for elem in gbfd if len(elem) > 0]
+
+
             list_return.append(gbfd)
         return list_return
 
