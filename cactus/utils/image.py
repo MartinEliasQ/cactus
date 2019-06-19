@@ -1,8 +1,7 @@
 import cv2
 import numpy as np
 from PIL import Image
-
-
+from datetime import datetime
 def read(path: str):
     return Image.open(path)
 
@@ -47,7 +46,14 @@ def save_Image(image, path):
     except:
         return False
 
-def crop_and_save(origen, dest, box, size):
-    cropped = crop_Image_rect(origen,box, size)
-    save_Image(cropped, dest)
+def crop_and_save(origen, dest, box, size=(299, 299)):
+    try:
+
+        cropped = crop_Image_rect(origen,box, size)
+        image_name = dest.replace(".jpg",str(datetime.now())+"__.jpg")
+        save_Image(cropped, image_name)
+        #print("Saved {}".format(image_name))
+    except:
+        return False
+
     

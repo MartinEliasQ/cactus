@@ -18,6 +18,7 @@ def to_frames(path: str = None, dest: str = "faces", rate=1):
 
 
 def folder_to_frames(input="videos", output="frames", rate=1):
+    folder.delete(output)
     folder.create(output)
     labels = folder.get_folders(input)
     labels_files = [(label, folder.get_files("{}/{}".format(input, label)))
